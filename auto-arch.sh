@@ -35,11 +35,14 @@ echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 mkdir -p /home/dbrent/.config/openbox
 mkdir -p /home/dbrent/gtk-3.0
 
-cp -R openbox ~/.config/
-cp -R gtk-3.0 ~/.config/
-
 mkdir /home/dbrent/.themes
 git clone https://github.com/numixproject/numix-gtk-theme-dark.git /home/dbrent/.themes/numix
+
+curl https://raw.githubusercontent.com/dbrentley/auto-arch/main/openbox/autostart -o /home/dbrent/.config/openbox/autostart
+curl https://raw.githubusercontent.com/dbrentley/auto-arch/main/openbox/menu.xml -o /home/dbrent/.config/openbox/menu.xml
+curl https://raw.githubusercontent.com/dbrentley/auto-arch/main/openbox/rc.xml -o /home/dbrent/.config/openbox/rc.xml
+curl https://raw.githubusercontent.com/dbrentley/auto-arch/main/gtk-3.0/settings.ini -o /home/dbrent/.config/gtk-3.0/settings.ini
+
 chown -R dbrent:dbrent /home/dbrent
 
 systemctl enable NetworkManager
@@ -53,5 +56,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 mkinitcpio -P
 exit
 umount /mnt
+exit
 
 #xrandr --output eDP1 --dpi 192
